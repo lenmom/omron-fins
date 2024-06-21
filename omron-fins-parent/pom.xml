@@ -8,12 +8,15 @@
 	<version>0.0.1</version>
 	<packaging>pom</packaging>
 
+	<name>Omron FINS Parent POM</name>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<netty.version>4.0.34.Final</netty.version>
 		<guava.version>19.0</guava.version>
+		<javax.xml.bind.version>2.2.2</javax.xml.bind.version>
 	</properties>
 
 	<dependencyManagement>
@@ -22,6 +25,14 @@
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
 				<version>1.7.21</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+			<dependency>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+				<version>${javax.xml.bind.version}</version>
+				<scope>compile</scope>
 			</dependency>
 
 			<dependency>
@@ -107,5 +118,4 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	<name>Omron FINS Parent POM</name>
 </project>
