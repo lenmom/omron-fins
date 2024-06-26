@@ -1,4 +1,4 @@
-package io.bessel.fins.master;
+package io.github.mookins.omron.fins.master;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,24 +10,24 @@ import java.util.concurrent.ExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.bessel.fins.Bit;
-import io.bessel.fins.FinsEndCode;
-import io.bessel.fins.FinsFrame;
-import io.bessel.fins.FinsFrameBuilder;
-import io.bessel.fins.FinsIoAddress;
-import io.bessel.fins.FinsMaster;
-import io.bessel.fins.FinsMasterException;
-import io.bessel.fins.FinsNodeAddress;
-import io.bessel.fins.codec.FinsFrameCodec;
-import io.bessel.fins.codec.FinsTcpFrameCodec;
-import io.bessel.fins.commands.FinsMemoryAreaReadCommand;
-import io.bessel.fins.commands.FinsMemoryAreaReadWordResponse;
-import io.bessel.fins.commands.FinsMemoryAreaWriteResponse;
-import io.bessel.fins.commands.FinsMemoryAreaWriteWordCommand;
-import io.bessel.fins.master.handlers.FinsMasterHandler;
-import io.bessel.fins.master.handlers.FinsTcpMasterCommandHandler;
-import io.bessel.fins.master.handlers.FinsTcpMasterHandshakeHandler;
-import io.bessel.fins.master.handlers.FinsTcpPayloadHandler;
+import io.github.mookins.omron.fins.Bit;
+import io.github.mookins.omron.fins.FinsEndCode;
+import io.github.mookins.omron.fins.FinsFrame;
+import io.github.mookins.omron.fins.FinsFrameBuilder;
+import io.github.mookins.omron.fins.FinsIoAddress;
+import io.github.mookins.omron.fins.FinsMaster;
+import io.github.mookins.omron.fins.FinsMasterException;
+import io.github.mookins.omron.fins.FinsNodeAddress;
+import io.github.mookins.omron.fins.codec.FinsFrameCodec;
+import io.github.mookins.omron.fins.codec.FinsTcpFrameCodec;
+import io.github.mookins.omron.fins.commands.FinsMemoryAreaReadCommand;
+import io.github.mookins.omron.fins.commands.FinsMemoryAreaReadWordResponse;
+import io.github.mookins.omron.fins.commands.FinsMemoryAreaWriteResponse;
+import io.github.mookins.omron.fins.commands.FinsMemoryAreaWriteWordCommand;
+import io.github.mookins.omron.fins.master.handlers.FinsMasterHandler;
+import io.github.mookins.omron.fins.master.handlers.FinsTcpMasterCommandHandler;
+import io.github.mookins.omron.fins.master.handlers.FinsTcpMasterHandshakeHandler;
+import io.github.mookins.omron.fins.master.handlers.FinsTcpPayloadHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -221,4 +221,8 @@ public class FinsNettyTcpMaster implements FinsMaster {
 		return null;
 	}
 
+	@Override
+	public void close() throws Exception {
+
+	}
 }

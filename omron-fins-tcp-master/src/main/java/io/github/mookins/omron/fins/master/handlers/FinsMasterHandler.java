@@ -1,10 +1,10 @@
-package io.bessel.fins.master.handlers;
+package io.github.mookins.omron.fins.master.handlers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.bessel.fins.FinsFrame;
-import io.bessel.fins.master.FinsNettyTcpMaster;
+import io.github.mookins.omron.fins.FinsFrame;
+import io.github.mookins.omron.fins.master.FinsNettyTcpMaster;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 

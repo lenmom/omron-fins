@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>io.github.mookins</groupId>
-		<artifactId>omron-fins</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<artifactId>omron-fins-parent</artifactId>
+		<version>0.0.1</version>
+		<relativePath>../omron-fins-parent/pom.xml</relativePath>
 	</parent>
 
 	<name>Omron FINS/TCP Master</name>
@@ -16,12 +17,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>fins-core</artifactId>
+			<artifactId>omron-fins-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>fins-codec</artifactId>
+			<artifactId>omron-fins-codec</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
@@ -34,12 +35,14 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>
+			<version>1.4.12</version>
 		</dependency>
+
 	</dependencies>
 </project>

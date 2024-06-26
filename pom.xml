@@ -35,6 +35,44 @@
 		<system>Travis CI</system>
 		<url>https://travis-ci.org/mookins/omron-fins</url>
 	</ciManagement>
+	<dependencies>
+		<dependency>
+			<groupId>io.github.mookins</groupId>
+			<artifactId>omron-fins-core</artifactId>
+			<version>0.0.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.github.mookins</groupId>
+			<artifactId>omron-fins-codec</artifactId>
+			<version>0.0.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-handler</artifactId>
+			<version>4.1.91.Final</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.github.mookins</groupId>
+			<artifactId>omron-fins-tcp-slave</artifactId>
+			<version>0.0.1</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>8</source>
+					<target>8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 	<modules>
 		<module>omron-fins-parent</module>
@@ -43,6 +81,8 @@
 		<module>omron-fins-udp-master</module>
 		<module>omron-fins-udp-slave</module>
 		<module>omron-fins-tcp-slave</module>
+		<module>omron-fins-tcp-master</module>
 		<module>omron-fins-tester</module>
+		<module>omron-fins-examples</module>
 	</modules>
 </project>

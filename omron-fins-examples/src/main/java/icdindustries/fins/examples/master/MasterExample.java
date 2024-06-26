@@ -7,11 +7,11 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.bessel.fins.FinsIoAddress;
-import io.bessel.fins.FinsMaster;
-import io.bessel.fins.FinsMasterException;
-import io.bessel.fins.FinsNodeAddress;
-import io.bessel.fins.master.FinsNettyTcpMaster;
+import io.github.mookins.omron.fins.FinsIoAddress;
+import io.github.mookins.omron.fins.FinsMaster;
+import io.github.mookins.omron.fins.FinsMasterException;
+import io.github.mookins.omron.fins.FinsNodeAddress;
+import io.github.mookins.omron.fins.master.FinsNettyTcpMaster;
 
 public class MasterExample {
 	

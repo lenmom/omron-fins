@@ -5,12 +5,12 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.bessel.fins.FinsEndCode;
-import io.bessel.fins.MemoryAreaWriteCommandHandler;
-import io.bessel.fins.commands.FinsMemoryAreaWriteCommand;
-import io.bessel.fins.commands.FinsMemoryAreaWriteResponse;
-import io.bessel.fins.commands.FinsMemoryAreaWriteWordCommand;
-import io.bessel.fins.slave.FinsNettyTcpSlave;
+import io.github.mookins.omron.fins.FinsEndCode;
+import io.github.mookins.omron.fins.MemoryAreaWriteCommandHandler;
+import io.github.mookins.omron.fins.commands.FinsMemoryAreaWriteCommand;
+import io.github.mookins.omron.fins.commands.FinsMemoryAreaWriteResponse;
+import io.github.mookins.omron.fins.commands.FinsMemoryAreaWriteWordCommand;
+import io.github.mookins.omron.fins.slave.FinsNettyTcpSlave;
 
 public class SlaveExample {
 
