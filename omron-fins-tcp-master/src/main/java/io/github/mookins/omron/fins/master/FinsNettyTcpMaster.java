@@ -73,14 +73,16 @@ public class FinsNettyTcpMaster implements FinsMaster {
 					.handler(new ChannelInitializer<SocketChannel>() {
 						@Override
 						public void initChannel(SocketChannel channel) throws Exception {
-							channel.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG))
+							channel.pipeline()
+									.addLast(new LoggingHandler(LogLevel.DEBUG))
 									// ByteBuf
 									.addLast(new LengthFieldBasedFrameDecoder(1024, 4, 4))
 									// chunked ByteBuf
 									.addLast(new FinsTcpFrameCodec())
 									// FINS/TCP
 									.addLast(new FinsTcpMasterHandshakeHandler(FinsNettyTcpMaster.this))
-									.addLast(new FinsTcpMasterCommandHandler()).addLast(new FinsTcpPayloadHandler())
+									.addLast(new FinsTcpMasterCommandHandler())
+									.addLast(new FinsTcpPayloadHandler())
 									// ByteBuf
 									.addLast(new FinsFrameCodec())
 									// FINS
