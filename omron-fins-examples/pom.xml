@@ -7,7 +7,6 @@
 		<groupId>io.github.mookins</groupId>
 		<artifactId>omron-fins-parent</artifactId>
 		<version>0.0.1</version>
-		<relativePath>../omron-fins-parent/pom.xml</relativePath>
 	</parent>
 
 	<name>Omron FINS Examples</name>
@@ -18,12 +17,10 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>omron-fins-tcp-master</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>omron-fins-tcp-slave</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>

@@ -1,88 +1,256 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>io.github.mookins</groupId>
-	<artifactId>omron-fins</artifactId>
-	<version>0.0.1</version>
-	<packaging>pom</packaging>
+    <groupId>io.github.mookins</groupId>
+    <artifactId>omron-fins-parent</artifactId>
+    <version>0.0.1</version>
+    <packaging>pom</packaging>
 
-	<name>Omron FINS</name>
-	<description>High-performance, non-blocking, zero-buffer-copying Omron FINS for Java</description>
-	<url>https://github.com/mookins/omron-fins</url>
+    <name>Omron FINS</name>
+    <description>High-performance, non-blocking, zero-buffer-copying Omron FINS for Java</description>
+    <url>https://github.com/mookins/omron-fins</url>
 
-	<developers>
-		<developer>
-			<id>mookins</id>
-			<name>mookins</name>
-			<email>mikey@mookins.com</email>
-		</developer>
-	</developers>
+    <developers>
+        <developer>
+            <id>mookins</id>
+            <name>mookins</name>
+            <email>mikey@mookins.com</email>
+        </developer>
+    </developers>
 
-	<scm>
-		<url>https://github.com/mookins/omron-fins</url>
-		<connection>https://github.com/mookins/omron-fins.git</connection>
-		<developerConnection>mookins</developerConnection>
-	</scm>
+    <scm>
+        <url>https://github.com/mookins/omron-fins</url>
+        <connection>https://github.com/mookins/omron-fins.git</connection>
+        <developerConnection>mookins</developerConnection>
+    </scm>
 
-	<issueManagement>
-		<url>https://github.com/mookins/omron-fins/issues</url>
-		<system>Github Issues</system>
-	</issueManagement>
+    <issueManagement>
+        <url>https://github.com/mookins/omron-fins/issues</url>
+        <system>Github Issues</system>
+    </issueManagement>
 
-	<ciManagement>
-		<system>Travis CI</system>
-		<url>https://travis-ci.org/mookins/omron-fins</url>
-	</ciManagement>
-	<dependencies>
-		<dependency>
-			<groupId>io.github.mookins</groupId>
-			<artifactId>omron-fins-core</artifactId>
-			<version>0.0.1</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.github.mookins</groupId>
-			<artifactId>omron-fins-codec</artifactId>
-			<version>0.0.1</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.netty</groupId>
-			<artifactId>netty-handler</artifactId>
-			<version>4.1.59.Final</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.github.mookins</groupId>
-			<artifactId>omron-fins-tcp-slave</artifactId>
-			<version>0.0.1</version>
-			<scope>compile</scope>
-		</dependency>
-	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>8</source>
-					<target>8</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <ciManagement>
+        <system>Travis CI</system>
+        <url>https://travis-ci.org/mookins/omron-fins</url>
+    </ciManagement>
 
-	<modules>
-		<module>omron-fins-parent</module>
-		<module>omron-fins-core</module>
-		<module>omron-fins-codec</module>
-		<module>omron-fins-udp-master</module>
-		<module>omron-fins-udp-slave</module>
-		<module>omron-fins-tcp-slave</module>
-		<module>omron-fins-tcp-master</module>
-		<module>omron-fins-tester</module>
-		<module>omron-fins-examples</module>
-	</modules>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <netty.version>4.1.59.Final</netty.version>
+        <org.slf4j.version>1.7.25</org.slf4j.version>
+        <org.slf4j-api.version>2.0.7</org.slf4j-api.version>
+        <guava.version>19.0</guava.version>
+        <javax.xml.bind.version>2.2.2</javax.xml.bind.version>
+        <org.javassist.version>3.20.0-GA</org.javassist.version>
+        <ch.qos.logback.classic.version>1.4.12</ch.qos.logback.classic.version>
+
+        <junit.version>4.12</junit.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.github.mookins</groupId>
+                <artifactId>omron-fins-core</artifactId>
+                <version>${project.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.github.mookins</groupId>
+                <artifactId>omron-fins-codec</artifactId>
+                <version>${project.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.github.mookins</groupId>
+                <artifactId>omron-fins-tcp-slave</artifactId>
+                <version>${project.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.mookins</groupId>
+                <artifactId>omron-fins-tcp-master</artifactId>
+                <version>${project.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.mookins</groupId>
+                <artifactId>omron-fins-udp-master</artifactId>
+                <version>${project.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.mookins</groupId>
+                <artifactId>omron-fins-udp-slave</artifactId>
+                <version>${project.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.mookins</groupId>
+                <artifactId>omron-fins-tester</artifactId>
+                <version>${project.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.mookins</groupId>
+                <artifactId>omron-fins-examples</artifactId>
+                <version>${project.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-handler</artifactId>
+                <version>${netty.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-buffer</artifactId>
+                <version>${netty.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec</artifactId>
+                <version>${netty.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${javax.xml.bind.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>${org.javassist.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${org.slf4j-api.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${ch.qos.logback.classic.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <module>omron-fins-core</module>
+        <module>omron-fins-codec</module>
+        <module>omron-fins-udp-master</module>
+        <module>omron-fins-udp-slave</module>
+        <module>omron-fins-tcp-slave</module>
+        <module>omron-fins-tcp-master</module>
+        <module>omron-fins-tester</module>
+        <module>omron-fins-examples</module>
+    </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.6.0</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5.3</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>2.4.3</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.19.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.10.4</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.0.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.0.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.6</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-scm-plugin</artifactId>
+                    <version>1.9.5</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

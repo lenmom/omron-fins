@@ -7,7 +7,6 @@
 		<groupId>io.github.mookins</groupId>
 		<artifactId>omron-fins-parent</artifactId>
 		<version>0.0.1</version>
-		<relativePath>../omron-fins-parent/pom.xml</relativePath>
 	</parent>
 
 	<name>Omron FINS Core</name>
@@ -18,14 +17,12 @@
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-buffer</artifactId>
-			<version>${netty.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>

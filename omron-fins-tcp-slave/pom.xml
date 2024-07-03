@@ -7,7 +7,6 @@
         <groupId>io.github.mookins</groupId>
         <artifactId>omron-fins-parent</artifactId>
         <version>0.0.1</version>
-        <relativePath>../omron-fins-parent/pom.xml</relativePath>
     </parent>
 
     <name>Omron FINS/TCP Slave</name>
@@ -18,24 +17,20 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>omron-fins-core</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>omron-fins-codec</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-handler</artifactId>
-            <version>${netty.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
-            <version>3.20.0-GA</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
@@ -68,8 +63,6 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.12</version>
-            <scope>compile</scope>
         </dependency>
 
     </dependencies>

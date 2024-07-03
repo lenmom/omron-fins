@@ -1,21 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+
+	<!-- 定义变量 -->
+	<!-- 日志文件大小 -->
+	<property name="log.maxSize" value="10MB"/>
+
+	<!-- 日志占用最大空间 -->
+	<property name="log.totalSizeCap" value="10GB"/>
+
+	<!-- 定义日志文件 输入位置 -->
+	<!-- 如果使用的是相对路径的话，当部署到tomcat路径下的时候，默认是输出到tomcat的bin目录下。
+     "../logs" 的意思是把日志输出到tomcat的logs目录下 -->
+	<property name="log.dir" value="../logs/ssm"/>
+
+	<!-- 日志最大的历史 30天 -->
+	<property name="log.maxHistory" value="30"/>
+
+	<!-- 控制台输出 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+
+		<!-- 临界值过滤器，过滤掉 TRACE 和 DEBUG 级别的日志 -->
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+
+	</appender>
+
+	<!-- RollingFileAppender：滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件。 -->
+	<appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+		<!-- 如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是true。 -->
+		<append>true</append>
+
+		<!-- 级别过滤器，只记录ERROR级别的日志 -->
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+
+		<!-- 当发生滚动时，决定 RollingFileAppender 的行为，涉及文件移动和重命名。 -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+			<!-- 必要节点，包含文件名及“%d”转换符，
+                “%d”可以包含一个 java.text.SimpleDateFormat指定的时间格式，如：%d{yyyy-MM}。 -->
+			<fileNamePattern>${log.dir}/error-log.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- 可选节点，控制保留的归档文件的最大数量，超出数量就删除旧文件。
+            假设设置每天滚动，且 <maxHistory>是30，则只保存最近30天的文件，
+            删除之前的旧文件。 注意，删除旧文件是，那些为了归档而创建的目录也会被删除。 -->
+			<maxHistory>${log.maxHistory}</maxHistory>
+
+		</rollingPolicy>
+
 		<encoder>
-			<pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n
-			</pattern>
+			<pattern>%d %-4relative [%thread] %-5level %logger - %msg%n</pattern>
+		</encoder>
+
+	</appender>
+
+	<!-- INFO -->
+	<appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.dir}/info-log.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>${log.maxHistory}</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d %-4relative [%thread] %-5level %logger - %msg%n</pattern>
+		</encoder>
+
+	</appender>
+
+	<!-- DEBUG -->
+	<appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+
+		<!-- 从日期与文件大小两个纬度控制日志文件分割 -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- 日志按日期分割时必须要有"%d"，表示日期 -->
+			<!-- 日志按大小分割时必须要有"%i"，表示个数 -->
+			<fileNamePattern>${log.dir}/debug-log.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<maxFileSize>${log.maxSize}</maxFileSize>
+			<maxHistory>${log.maxHistory}</maxHistory>
+			<totalSizeCap>${log.totalSizeCap}</totalSizeCap>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d %-4relative [%thread] %-5level %logger - %msg%n</pattern>
 		</encoder>
 	</appender>
 
-	<appender name="file" class="ch.qos.logback.core.FileAppender">
-		<file>log/server.log</file>
-
-		<encoder>
-			<pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n
-			</pattern>
-		</encoder>
-	</appender>
-
-	<root level="debug">
-		<appender-ref ref="stdout" />
+	<!-- 根logger -->
+	<!-- 日志级别：ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF -->
+	<root level="ALL">
+		<appender-ref ref="STDOUT"/>
+		<!--		<appender-ref ref="DEBUG"/>-->
+		<!--		<appender-ref ref="INFO"/>-->
+		<!--		<appender-ref ref="ERROR"/>-->
 	</root>
+
+	<!-- name：用来指定受此logger约束的某一个包或者具体的某一个类。
+        1、没有配置level，将继承它的上一级<root>的日志级别“debug”。
+        2、additivity默认为true，将此logger的打印信息向上级传递。
+        3、没有设置appender，此logger本身不打印任何日志信息。
+        4、root接收到下级传递的信息，交给已配置好的名为“stdout”的appender处理。
+    -->
+	<!--<logger name="com.snsprj.service"/>-->
+
+	<!-- 处理com.snsprj.controller包下所有日志，
+    只输出level >= DEBUG级别的日志，
+    因为没有DEBUG的appender，所以不会输出debug信息 -->
+	<!--<logger name="com.snsprj.controller" additivity="false" level="DEBUG">-->
+	<!--<appender-ref ref="INFO"/>-->
+	<!--<appender-ref ref="ERROR"/>-->
+	<!--</logger>-->
+
 </configuration>
