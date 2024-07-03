@@ -13,6 +13,8 @@ import io.github.mookins.omron.fins.tcp.FinsTcpFrameBuilder;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
+import java.nio.ByteBuffer;
+
 public class FinsTcpMasterHandshakeHandler extends ChannelInboundHandlerAdapter {
 
 	private static Logger logger = LoggerFactory.getLogger(FinsTcpMasterHandshakeHandler.class);
@@ -29,10 +31,12 @@ public class FinsTcpMasterHandshakeHandler extends ChannelInboundHandlerAdapter 
 		FinsTcpFrame finsTcpFrame = new FinsTcpFrameBuilder()
 				.setCommandCode(FinsTcpCommandCode.FINS_CLIENT_NODE_ADDRESS_DATA_SEND)
 				.setErrorCode(FinsTcpErrorCode.NORMAL)
-				.setData(new byte[] { 0, 0, 0, 0x14 })
+				.setData(new byte[] { 0, 0, 0, 0x0B })
 				.build();
-		
-		context.writeAndFlush(finsTcpFrame);		
+
+		byte[] data=finsTcpFrame.toByteArray();
+		ByteBuffer buf = ByteBuffer.wrap(data);
+		context.writeAndFlush(buf);
 	}
 	
 	@Override

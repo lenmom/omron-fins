@@ -25,9 +25,10 @@
 		</filter>
 
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-			<pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+			<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{36}) - %highlight(%msg) %n</pattern>
+			<charset>UTF-8</charset>
 		</encoder>
-
 	</appender>
 
 	<!-- RollingFileAppender：滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件。 -->
@@ -59,6 +60,7 @@
 
 		<encoder>
 			<pattern>%d %-4relative [%thread] %-5level %logger - %msg%n</pattern>
+			<charset>UTF-8</charset>
 		</encoder>
 
 	</appender>
@@ -79,6 +81,7 @@
 
 		<encoder>
 			<pattern>%d %-4relative [%thread] %-5level %logger - %msg%n</pattern>
+			<charset>UTF-8</charset>
 		</encoder>
 
 	</appender>
@@ -104,6 +107,7 @@
 
 		<encoder>
 			<pattern>%d %-4relative [%thread] %-5level %logger - %msg%n</pattern>
+			<charset>UTF-8</charset>
 		</encoder>
 	</appender>
 
