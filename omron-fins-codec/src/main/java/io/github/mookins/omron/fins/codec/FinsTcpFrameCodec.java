@@ -20,6 +20,7 @@ public class FinsTcpFrameCodec extends ByteToMessageCodec<FinsTcpFrame> {
 		super.channelRead(ctx, msg);
 	}
 
+
 	@Override
 	protected void encode(ChannelHandlerContext context, FinsTcpFrame finsTcpFrame, ByteBuf out) throws Exception {
 		logger.debug("Encode FINS/TCP -> ByteBuf");
@@ -40,5 +41,4 @@ public class FinsTcpFrameCodec extends ByteToMessageCodec<FinsTcpFrame> {
 		
 		out.add(finsTcpFrame);
 	}
-	
 }

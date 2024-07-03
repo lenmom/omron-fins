@@ -32,10 +32,7 @@ public class FinsTcpMasterHandshakeHandler extends ChannelInboundHandlerAdapter 
                 .setErrorCode(FinsTcpErrorCode.NORMAL)
                 .setData(new byte[]{0, 0, 0, 0x0B})
                 .build();
-
-        byte[] data = finsTcpFrame.toByteArray();
-        ByteBuffer buf = ByteBuffer.wrap(data);
-        context.writeAndFlush(buf);
+        context.writeAndFlush(finsTcpFrame);
     }
 
     @Override
@@ -52,5 +49,6 @@ public class FinsTcpMasterHandshakeHandler extends ChannelInboundHandlerAdapter 
             this.master.getQueue().remove().complete(null);
         }
     }
+
 
 }
