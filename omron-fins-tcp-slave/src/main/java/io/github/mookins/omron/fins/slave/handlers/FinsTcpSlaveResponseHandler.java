@@ -17,6 +17,11 @@ public class FinsTcpSlaveResponseHandler extends ChannelOutboundHandlerAdapter {
 	final static Logger logger = LoggerFactory.getLogger(FinsTcpSlaveResponseHandler.class);
 
 	@Override
+	public void read(ChannelHandlerContext ctx) throws Exception {
+		super.read(ctx);
+	}
+
+	@Override
 	public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
 		if (msg instanceof ByteBuf) {
 			logger.debug("Got a ByteBuf, going to pack it into a FINS/TCP frame");

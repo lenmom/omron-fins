@@ -53,19 +53,23 @@ public class FinsNettyTcpSlave implements FinsSlave {
 					.childHandler(new ChannelInitializer<SocketChannel>() {
 						@Override
 						public void initChannel(SocketChannel channel) throws Exception {
-							channel.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG))
+							channel.pipeline().
+									addLast(new LoggingHandler(LogLevel.DEBUG))
 									// ByteBuf
 									.addLast(new LengthFieldBasedFrameDecoder(1024, 4, 4))
 									// chunked ByteBuf
 									.addLast(new FinsTcpFrameCodec())
 									// FINS/TCP
-									.addLast(new FinsTcpCommandHandler()).addLast(new FinsTcpSlaveResponseHandler())
+									.addLast(new FinsTcpCommandHandler())
+									.addLast(new FinsTcpSlaveResponseHandler())
 									// ByteBuf
 									.addLast(new FinsFrameCodec())
 									// FINS
 									.addLast(new FinsSlaveCommandHandler(FinsNettyTcpSlave.this));
 						}
-					}).option(ChannelOption.SO_BACKLOG, 128).childOption(ChannelOption.SO_KEEPALIVE, true);
+					})
+					.option(ChannelOption.SO_BACKLOG, 128)
+					.childOption(ChannelOption.SO_KEEPALIVE, true);
 
 			bootstrap.bind(this.host, this.port).sync();
 			logger.info("Listening on {}:{}", this.host, this.port);

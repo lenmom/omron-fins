@@ -28,6 +28,11 @@ public class FinsSlaveCommandHandler extends SimpleChannelInboundHandler<FinsFra
         this.finsNettyTcpSlave = finsNettyTcpSlave;
     }
 
+    @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        super.channelRead(ctx, msg);
+    }
+
     public void channelRead0(ChannelHandlerContext context, FinsFrame finsFrame) throws Exception {
         logger.debug(String.format("FINS command handler = %s, ", finsFrame));
 

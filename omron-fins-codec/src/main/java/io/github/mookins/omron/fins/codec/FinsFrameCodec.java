@@ -16,6 +16,11 @@ public class FinsFrameCodec extends ByteToMessageCodec<FinsFrame> {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
+	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+		super.channelRead(ctx, msg);
+	}
+
+	@Override
 	protected void encode(ChannelHandlerContext context, FinsFrame finsFrame, ByteBuf out) throws Exception {
 		out.writeBytes(finsFrame.toByteArray());
 		logger.debug("Encoded FINS frame");

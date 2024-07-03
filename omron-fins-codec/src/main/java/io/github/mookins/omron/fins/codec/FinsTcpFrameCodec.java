@@ -16,6 +16,11 @@ public class FinsTcpFrameCodec extends ByteToMessageCodec<FinsTcpFrame> {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
+	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+		super.channelRead(ctx, msg);
+	}
+
+	@Override
 	protected void encode(ChannelHandlerContext context, FinsTcpFrame finsTcpFrame, ByteBuf out) throws Exception {
 		logger.debug("Encode FINS/TCP -> ByteBuf");
 		logger.debug(finsTcpFrame.toString());
