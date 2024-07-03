@@ -69,3 +69,10 @@ Desktop.ini
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
+/.idea/compiler.xml
+/.idea/encodings.xml
+/.idea/jarRepositories.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/omron-fins-tcp-slave/omron-fins-tcp-slave.iml
+/.idea/.gitignore
