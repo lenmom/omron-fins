@@ -1,6 +1,5 @@
 package io.github.mookins.omron.fins.master.handlers;
 
-import io.github.mookins.omron.fins.master.handlers.FinsMasterHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,41 +16,41 @@ import java.nio.ByteBuffer;
 
 public class FinsTcpMasterHandshakeHandler extends ChannelInboundHandlerAdapter {
 
-	private static Logger logger = LoggerFactory.getLogger(FinsTcpMasterHandshakeHandler.class);
-	private final FinsNettyTcpMaster master;
+    private static Logger logger = LoggerFactory.getLogger(FinsTcpMasterHandshakeHandler.class);
+    private final FinsNettyTcpMaster master;
 
-	public FinsTcpMasterHandshakeHandler(final FinsNettyTcpMaster master) {
-		this.master = master;
-	}
+    public FinsTcpMasterHandshakeHandler(final FinsNettyTcpMaster master) {
+        this.master = master;
+    }
 
-	@Override
-	public void channelActive(ChannelHandlerContext context) throws Exception {
-		super.channelActive(context);
-		logger.debug("Channel active, starting handshake");
-		FinsTcpFrame finsTcpFrame = new FinsTcpFrameBuilder()
-				.setCommandCode(FinsTcpCommandCode.FINS_CLIENT_NODE_ADDRESS_DATA_SEND)
-				.setErrorCode(FinsTcpErrorCode.NORMAL)
-				.setData(new byte[] { 0, 0, 0, 0x0B })
-				.build();
+    @Override
+    public void channelActive(ChannelHandlerContext context) throws Exception {
+        super.channelActive(context);
+        logger.debug("Channel active, starting handshake");
+        FinsTcpFrame finsTcpFrame = new FinsTcpFrameBuilder()
+                .setCommandCode(FinsTcpCommandCode.FINS_CLIENT_NODE_ADDRESS_DATA_SEND)
+                .setErrorCode(FinsTcpErrorCode.NORMAL)
+                .setData(new byte[]{0, 0, 0, 0x0B})
+                .build();
 
-		byte[] data=finsTcpFrame.toByteArray();
-		ByteBuffer buf = ByteBuffer.wrap(data);
-		context.writeAndFlush(buf);
-	}
-	
-	@Override
-	public void channelRead(ChannelHandlerContext context, Object message) throws Exception {
-		if (message instanceof FinsTcpFrame) {
-			logger.debug("We have received a FinsTcp frame during handshake");
-			// TODO check that we have a legitimate handshake reply
-			
-			context.pipeline().remove(this.getClass());
-			context.pipeline()
-				.addLast(new FinsFrameCodec())
-				.addLast(new FinsMasterHandler(this.master));
-			
-			this.master.getQueue().remove().complete(null);
-		}
-	}
-	
+        byte[] data = finsTcpFrame.toByteArray();
+        ByteBuffer buf = ByteBuffer.wrap(data);
+        context.writeAndFlush(buf);
+    }
+
+    @Override
+    public void channelRead(ChannelHandlerContext context, Object message) throws Exception {
+        if (message instanceof FinsTcpFrame) {
+            logger.debug("We have received a FinsTcp frame during handshake");
+            // TODO check that we have a legitimate handshake reply
+
+            context.pipeline().remove(this.getClass());
+            context.pipeline()
+                    .addLast(new FinsFrameCodec())
+                    .addLast(new FinsMasterHandler(this.master));
+
+            this.master.getQueue().remove().complete(null);
+        }
+    }
+
 }
