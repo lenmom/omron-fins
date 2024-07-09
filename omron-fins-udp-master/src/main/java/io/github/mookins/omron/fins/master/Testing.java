@@ -13,12 +13,12 @@ public class Testing {
 
 	public static void main(String[] args) throws FinsMasterException {
 		FinsNettyUdpMaster finsMaster = new FinsNettyUdpMaster(
-			new InetSocketAddress("192.168.250.10", 9600),
+			new InetSocketAddress("127.0.0.1", 9600),
 			new InetSocketAddress("0.0.0.0", 9601),
-			new FinsNodeAddress(0,  2,  0)
+			new FinsNodeAddress(0,  0,  0)
 		);
 		
-		FinsNodeAddress destNode = new FinsNodeAddress(0,  10,  0);
+		FinsNodeAddress destNode = new FinsNodeAddress(0,  0,  0);
 		
 		finsMaster.connect();
 //		//short d = finsMaster.readWord(destNode, new FinsIoAddress(FinsIoMemoryArea.DM_WORD, 13000));

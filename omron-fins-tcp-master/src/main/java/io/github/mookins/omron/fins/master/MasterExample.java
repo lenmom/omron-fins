@@ -55,7 +55,7 @@ public class MasterExample {
 		} finally {
 			executor.shutdown();
 			executor.awaitTermination(1, TimeUnit.MINUTES);
-			//client.disconnect();
+			client.disconnect();
 		}
 	}
 }

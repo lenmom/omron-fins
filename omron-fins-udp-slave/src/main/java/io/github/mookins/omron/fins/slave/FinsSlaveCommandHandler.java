@@ -50,6 +50,14 @@ public class FinsSlaveCommandHandler extends SimpleChannelInboundHandler<FinsFra
 				this.finsNettyUdpSlave.getMemoryAreaWriteHandler()
 					.ifPresent(handler -> handleMemoryAreaWriteCommand(handler, finsFrame));
 				break;
+			case MEMORY_AREA_READ:
+				responseFinsFrame = FinsFrameBuilder.builderFromPrototype(finsFrame)
+						.setMessageType(FinsMessageType.RESPONSE)
+						.setDestinationAddress(finsFrame.getSourceAddress())
+						.setSourceAddress(finsFrame.getDestinationAddress())
+						.setData(new byte[]{0x01, 0x01, 0x00, 0x00,0x00,0x11})
+						.build();
+				break;
 		}
 		
 		context.channel().writeAndFlush(responseFinsFrame);

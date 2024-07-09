@@ -23,7 +23,7 @@ public class FinsFrameUdpCodec extends MessageToMessageCodec<DatagramPacket, Fin
 	protected void encode(ChannelHandlerContext ctx, FinsFrame frame, List<Object> out) throws Exception {
 		try {
 			ByteBuf buf = Unpooled.wrappedBuffer(frame.toByteArray());
-			DatagramPacket packet = new DatagramPacket(buf, new InetSocketAddress("192.168.250.10", 9600));
+			DatagramPacket packet = new DatagramPacket(buf, new InetSocketAddress("127.0.0.1", 9600));
 			out.add(packet);
 		} finally {
 			ReferenceCountUtil.release(frame);
